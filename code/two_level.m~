@@ -1,0 +1,13 @@
+function [image]=two_level(raw_image)
+    image=raw_image;
+    [m,n]=size(image);
+    for i=1:m
+        for j=1:n
+           if(image(i,j)>127)
+               image(i,j)=255
+           end
+           else
+               
+        end
+    end
+end

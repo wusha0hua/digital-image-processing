@@ -1,0 +1,67 @@
+import sys
+import numpy as np
+import cv2 as cv
+from PySide6.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+
+def fun():
+    print(window)
+    file=QFileDialog(window)
+    print(file.getOpenFileName(window,'select'))
+
+
+def select(n):
+    if(n==0):
+        print(n)
+
+image_dir='/disk/repository/course/dip/term/sourceimage/'
+
+select_method=['gray level','noise']
+select_gary=['2','4','8','16','32','64','128']
+selct_noise=['guassian','salt&pepper']
+
+image_size=512
+button_size_width=80
+button_size_height=50
+
+
+app=QApplication(sys.argv)
+window=QMainWindow()
+window.resize(1200,700)
+window.setWindowTitle('巫少华 2019081307020')
+
+menu=QMenuBar(window)
+menu_action=menu.addAction('open')
+menu_action.triggered.connect(fun)
+
+combox_method=QComboBox(window)
+combox_method.addItems(select_method)
+combox_method.activated[int].connect(select)
+
+now_label=QLabel(window)
+change_label=QLabel(window)
+
+open_button=QPushButton('open',window)
+save_button=QPushButton('save',window)
+
+pixmap=QPixmap(image_dir+'lena.bmp')
+now_label.setPixmap(pixmap)
+change_label.setPixmap(pixmap)
+
+now_label.resize(image_size,image_size)
+now_label.move(50,50)
+
+change_label.resize(image_size,image_size)
+change_label.move(638,50)
+
+open_button.resize(button_size_width,button_size_height)
+open_button.move(281,582)
+open_button.clicked.connect(fun)
+
+save_button.resize(button_size_width,button_size_height)
+save_button.move((638+512//2-button_size_width//2),582)
+
+window.show()
+
+app.exec_()
